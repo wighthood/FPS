@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions.FindAction("Move");
+
     }
 
     private void Update()
@@ -25,4 +26,6 @@ public class PlayerControl : MonoBehaviour
         Vector2 direction = moveAction.ReadValue<Vector2>();
         transform.position += new Vector3(direction.x, 0, direction.y)* speed *Time.deltaTime;
     }
+
+
 }
