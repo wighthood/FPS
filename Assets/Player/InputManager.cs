@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+
+    [SerializeField] Movement movement;
     PlayerController controls;
     PlayerController.PlayerControlActions playerMovement;
 
@@ -14,8 +16,13 @@ public class InputManager : MonoBehaviour
         controls = new PlayerController();
         playerMovement = controls.PlayerControl;
         playerMovement.PlayerMovement.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
+        playerMovement.Jump.performed += _ => movement.onJumpPressed();
     }
 
+    private void Update()
+    {
+        movement.receiveInput(horizontalInput);
+    }
     private void OnEnable()
     {
         controls.Enable();
