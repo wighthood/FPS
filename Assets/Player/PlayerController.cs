@@ -62,6 +62,24 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseLock"",
+                    ""type"": ""Button"",
+                    ""id"": ""25b1d88a-7346-496e-a9e1-1de512a66ce2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""c0afd835-7dd6-41aa-a3cc-95296b018ec1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""MouseY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea07c2da-38f3-4c83-9552-546315a71cad"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0eaa234b-e840-40fc-b103-72437c4cc218"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +204,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_PlayerControl_Jump = m_PlayerControl.FindAction("Jump", throwIfNotFound: true);
         m_PlayerControl_MouseX = m_PlayerControl.FindAction("MouseX", throwIfNotFound: true);
         m_PlayerControl_MouseY = m_PlayerControl.FindAction("MouseY", throwIfNotFound: true);
+        m_PlayerControl_MouseLock = m_PlayerControl.FindAction("MouseLock", throwIfNotFound: true);
+        m_PlayerControl_Shoot = m_PlayerControl.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +271,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControl_Jump;
     private readonly InputAction m_PlayerControl_MouseX;
     private readonly InputAction m_PlayerControl_MouseY;
+    private readonly InputAction m_PlayerControl_MouseLock;
+    private readonly InputAction m_PlayerControl_Shoot;
     public struct PlayerControlActions
     {
         private @PlayerController m_Wrapper;
@@ -237,6 +281,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerControl_Jump;
         public InputAction @MouseX => m_Wrapper.m_PlayerControl_MouseX;
         public InputAction @MouseY => m_Wrapper.m_PlayerControl_MouseY;
+        public InputAction @MouseLock => m_Wrapper.m_PlayerControl_MouseLock;
+        public InputAction @Shoot => m_Wrapper.m_PlayerControl_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +304,12 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @MouseY.started += instance.OnMouseY;
             @MouseY.performed += instance.OnMouseY;
             @MouseY.canceled += instance.OnMouseY;
+            @MouseLock.started += instance.OnMouseLock;
+            @MouseLock.performed += instance.OnMouseLock;
+            @MouseLock.canceled += instance.OnMouseLock;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
         }
 
         private void UnregisterCallbacks(IPlayerControlActions instance)
@@ -274,6 +326,12 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @MouseY.started -= instance.OnMouseY;
             @MouseY.performed -= instance.OnMouseY;
             @MouseY.canceled -= instance.OnMouseY;
+            @MouseLock.started -= instance.OnMouseLock;
+            @MouseLock.performed -= instance.OnMouseLock;
+            @MouseLock.canceled -= instance.OnMouseLock;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
         }
 
         public void RemoveCallbacks(IPlayerControlActions instance)
@@ -297,5 +355,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
+        void OnMouseLock(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

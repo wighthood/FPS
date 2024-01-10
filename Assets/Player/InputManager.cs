@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] Movement movement;
     [SerializeField] MouseLook mouseLook;
+    [SerializeField] Gun gun;
     PlayerController controls;
     PlayerController.PlayerControlActions playerMovement;
 
@@ -21,6 +22,7 @@ public class InputManager : MonoBehaviour
         playerMovement.Jump.performed += _ => movement.onJumpPressed();
         playerMovement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         playerMovement.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
+        playerMovement.Shoot.performed += _ => gun.Shoot();
     }
 
     private void Update()
