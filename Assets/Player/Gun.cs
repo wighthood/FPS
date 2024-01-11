@@ -6,7 +6,7 @@ public class Gun : MonoBehaviour
 {
     Transform cam;
 
-    [SerializeField] float range = 50f;
+    [SerializeField] float range = 0.5f;
 
     private void Awake()
     {

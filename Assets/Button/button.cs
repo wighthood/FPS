@@ -6,12 +6,36 @@ public class button: MonoBehaviour
 {
     [SerializeField] GameObject hitEffect;
     public GameObject[] LinkedObjects;
+    public float Basetimer;
     private Color color;
     private int i = 0;
+    private bool activated = false;
 
     public void Button(Vector3 HitPos, Vector3 HitNormal)
     {
-        if (gameObject.GetComponent<Renderer>().material.color == new Color(0,0.5f,0))
+
+        Instantiate(hitEffect, HitPos, Quaternion.LookRotation(HitNormal));
+        if (Basetimer <= 0)
+        {
+            invertstate();
+        }
+        else if (!activated)
+        {
+            activated = true;
+            invertstate();
+            StartCoroutine(_Timer());
+        }
+    }
+
+    IEnumerator _Timer()
+    {
+        yield return new WaitForSeconds(Basetimer);
+        invertstate();
+        activated = false;
+    }
+    private void invertstate()
+    {
+        if (gameObject.GetComponent<Renderer>().material.color == new Color(0, 0.5f, 0))
         {
             color = new Color(0.5f, 0, 0);
         }
@@ -21,8 +45,7 @@ public class button: MonoBehaviour
         }
 
         gameObject.GetComponent<Renderer>().material.color = color;
-        Instantiate(hitEffect, HitPos, Quaternion.LookRotation(HitNormal));
-        foreach(GameObject obj in LinkedObjects) 
+        foreach (GameObject obj in LinkedObjects)
         {
             if (LinkedObjects[i].activeSelf == false)
             {
@@ -35,7 +58,6 @@ public class button: MonoBehaviour
             i++;
         }
         i = 0;
-        
-    }
 
+    }
 }
