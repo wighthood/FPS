@@ -7,7 +7,6 @@ public class Gun : MonoBehaviour
     Transform cam;
 
     [SerializeField] float range = 50f;
-    [SerializeField] float damage = 10f;
 
     private void Awake()
     {
@@ -19,9 +18,9 @@ public class Gun : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.position,cam.forward, out hit, range))
         {
-            if (hit.collider.GetComponent<damageable>() != null) 
+            if (hit.collider.GetComponent<button>() != null) 
             {
-                hit.collider.GetComponent<damageable>().takedamage(damage);
+                hit.collider.GetComponent<button>().Button(hit.point, hit.normal);
             }
         }
     }
