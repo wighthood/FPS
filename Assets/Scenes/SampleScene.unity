@@ -4960,6 +4960,10 @@ PrefabInstance:
       propertyPath: Basetimer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2341615531457333522, guid: b1a8a253ac4e99b4a8c6d5026b3793df, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2857700042945409736, guid: b1a8a253ac4e99b4a8c6d5026b3793df, type: 3}
       propertyPath: Basetimer
       value: 2
