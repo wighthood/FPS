@@ -47,17 +47,9 @@ public class button: MonoBehaviour
         gameObject.GetComponent<Renderer>().material.color = color;
         foreach (GameObject obj in LinkedObjects)
         {
-            if (LinkedObjects[i].activeSelf == false)
-            {
-                LinkedObjects[i].SetActive(true);
-            }
-            else if (LinkedObjects[i].activeSelf == true)
-            {
-                LinkedObjects[i].SetActive(false);
-            }
+            LinkedObjects[i].SetActive(!LinkedObjects[i].activeSelf);
             i++;
         }
         i = 0;
-
     }
 }

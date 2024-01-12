@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        isgrounded = Physics.CheckSphere(transform.position, 1.1f, groundmask);
+        isgrounded = Physics.Raycast(transform.position, -transform.up,1.1f, groundmask);
         if (isgrounded )
         {
             verticalVelocity.y = 0;
